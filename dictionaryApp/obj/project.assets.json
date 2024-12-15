@@ -236,11 +236,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\amrmo\\Desktop\\PL3\\Project\\dictionaryApp\\dictionaryApp\\dictionaryApp.fsproj",
+      "projectUniqueName": "C:\\Users\\amrmo\\Desktop\\Projects\\git\\dictionaryApp\\dictionaryApp\\dictionaryApp.fsproj",
       "projectName": "dictionaryApp",
-      "projectPath": "C:\\Users\\amrmo\\Desktop\\PL3\\Project\\dictionaryApp\\dictionaryApp\\dictionaryApp.fsproj",
+      "projectPath": "C:\\Users\\amrmo\\Desktop\\Projects\\git\\dictionaryApp\\dictionaryApp\\dictionaryApp.fsproj",
       "packagesPath": "C:\\Users\\amrmo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\amrmo\\Desktop\\PL3\\Project\\dictionaryApp\\dictionaryApp\\obj\\",
+      "outputPath": "C:\\Users\\amrmo\\Desktop\\Projects\\git\\dictionaryApp\\dictionaryApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\amrmo\\AppData\\Roaming\\NuGet\\NuGet.Config"
