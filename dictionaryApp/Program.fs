@@ -24,6 +24,10 @@ let updateEntry (dict: DigitalDictionary) word newDefinition =
     | Some existingEntry -> dict.Add(word, { existingEntry with Definition = newDefinition })
     | None -> dict  // Word not found, return the original dictionary
 
+// Remove an entry from the dictionary (creates a new Map)
+let removeEntry (dict: DigitalDictionary) word =
+    dict.Remove(word)
+
 // Case-insensitive search function
 let searchDictionary (dict: DigitalDictionary) query =
     dict |> Map.filter (fun key entry -> Regex.IsMatch(entry.Word, query, RegexOptions.IgnoreCase))
@@ -42,7 +46,7 @@ let loadDictionaryFromFile filePath =
         Map.empty // Return an empty dictionary if the file does not exist
 
 // Windows Forms UI elements
-let form = new Form(Text = "Digital Dictionary", Width = 700, Height = 550)
+let form = new Form(Text = "Digital Dictionary", Width = 700, Height = 600) // Increased height for delete button
 form.StartPosition <- FormStartPosition.CenterScreen  // Center the form on screen
 
 // Add Entry Section Labels
@@ -77,6 +81,9 @@ let editDefinitionTextBox = new TextBox(Location = Drawing.Point(140, 220), Widt
 // Edit Button
 let editButton = new Button(Text = "Edit Entry", Location = Drawing.Point(10, 260), Width = 150)
 
+// Delete Button
+let deleteButton = new Button(Text = "Delete Entry", Location = Drawing.Point(170, 260), Width = 150) // New Delete Button
+
 // Result Label
 let resultLabel = new Label(Location = Drawing.Point(10, 300), Width = 670, Height = 100, Text = "", TextAlign = System.Drawing.ContentAlignment.TopLeft)
 
@@ -106,8 +113,6 @@ let populateEditComboBox () =
     let keys = Map.keys !dictionary |> List.ofSeq // Convert Map keys to a list
     // Cast the list of strings to an array of objects (obj[])
     editWordComboBox.Items.AddRange(keys |> List.toArray |> Array.map box)  // Add words to ComboBox all at once
-
-
 
 
 // Update dictionary when adding an entry
@@ -171,6 +176,21 @@ editButton.Click.Add(fun _ ->
             resultLabel.ForeColor <- System.Drawing.Color.Red
 )
 
+// Delete functionality
+deleteButton.Click.Add(fun _ ->
+    let selectedWord = editWordComboBox.SelectedItem :?> string
+    if String.IsNullOrWhiteSpace(selectedWord) then
+        resultLabel.Text <- "Please select a word to delete."
+        resultLabel.ForeColor <- System.Drawing.Color.Red
+    else
+        dictionary := removeEntry !dictionary selectedWord
+        saveDictionaryToFile !dictionary filePath  // Save the updated dictionary after deletion
+        populateEditComboBox()  // Refresh ComboBox
+        updateResult (sprintf "Deleted: %s" selectedWord)
+        editWordComboBox.SelectedIndex <- -1  // Deselect the ComboBox
+        editDefinitionTextBox.Clear()
+)
+
 // Save dictionary to file
 saveButton.Click.Add(fun _ ->
     saveDictionaryToFile !dictionary filePath
@@ -210,6 +230,8 @@ form.Controls.Add(editLabel)
 form.Controls.Add(editWordComboBox)
 form.Controls.Add(editDefinitionTextBox)
 form.Controls.Add(editButton)
+
+form.Controls.Add(deleteButton)  // Add the Delete button
 
 form.Controls.Add(resultLabel)
 
