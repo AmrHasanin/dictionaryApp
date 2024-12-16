@@ -14,6 +14,7 @@
   </ItemGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgSystem_Reactive_Windows_Forms Condition=" '$(PkgSystem_Reactive_Windows_Forms)' == '' ">C:\Users\amrmo\.nuget\packages\system.reactive.windows.forms\6.0.1</PkgSystem_Reactive_Windows_Forms>
+    <PkgNewtonsoft_Json Condition=" '$(PkgNewtonsoft_Json)' == '' ">C:\Users\amrmo\.nuget\packages\newtonsoft.json\13.0.3</PkgNewtonsoft_Json>
     <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">C:\Users\amrmo\.nuget\packages\fsharp.core\8.0.401</PkgFSharp_Core>
   </PropertyGroup>
 </Project>
